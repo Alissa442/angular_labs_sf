@@ -1,6 +1,25 @@
-<!-- accounts.component.html -->
 <div class="container mt-4">
-    <h1>Accounts Page</h1>
-    <img src="penguin.jpeg" alt="Example Image" class="img-fluid mt-3">
+  <h1 class="mb-4">Account Page</h1>
+  <img src="penguin.jpeg" alt="Example Image" class="img-fluid mt-3 mb-4">
+
+  <!-- Display user data if available -->
+  <div *ngIf="user.username; else noData">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">User Details</h5>
+        <p class="card-text"><strong>Username:</strong> {{ user.username }}</p>
+        <p class="card-text"><strong>Birthdate:</strong> {{ user.birthdate }}</p>
+        <p class="card-text"><strong>Age:</strong> {{ user.age }}</p>
+        <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+      </div>
+    </div>
   </div>
-  
+
+  <!-- Template for no user data -->
+  <ng-template #noData>
+    <div class="alert alert-warning" role="alert">
+      No user data available. Please log in again.
+    </div>
+  </ng-template>
+</div>
+

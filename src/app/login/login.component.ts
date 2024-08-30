@@ -15,27 +15,23 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string | null = null;
 
-  // Hardcoded user data
   private users = [
-    { email: 'user1@example.com', password: 'password1' },
-    { email: 'user2@example.com', password: 'password2' },
-    { email: 'user3@example.com', password: 'password3' }
+    { email: 'user1@example.com', password: 'password1', username: 'User One', birthdate: '1990-01-01', age: 34 },
+    { email: 'user2@example.com', password: 'password2', username: 'User Two', birthdate: '1992-02-02', age: 32 },
+    { email: 'user3@example.com', password: 'password3', username: 'User Three', birthdate: '1994-03-03', age: 30 }
   ];
 
   constructor(private router: Router) {}
 
   onLogin() {
-    // Reset error message
     this.errorMessage = null;
 
-    // Check if the user exists in the hardcoded data
     const user = this.users.find(u => u.email === this.email && u.password === this.password);
     
     if (user) {
-      // Navigate to the account page if the login is successful
-      this.router.navigate(['/account']);
+      sessionStorage.setItem('user', JSON.stringify(user)); // Store user data in session storage
+      this.router.navigate(['/account']); // Navigate to the account page
     } else {
-      // Set an error message if the login fails
       this.errorMessage = 'Invalid email or password';
     }
   }
